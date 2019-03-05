@@ -7,5 +7,6 @@
 -If letters are correct then replace underscore
 -If letters are incorrect display in a box
 -Push both wrong and correct guesses in an array
+-Create a sound each guess is correct
 -Create counter for lives remaining
 -Wrap everything in a play/reset function
