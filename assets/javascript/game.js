@@ -1,18 +1,20 @@
-
+function play(){
 // arrow of pokemsn
 let pokemonList = ['pikachu','mew', 'squirtle','zubat', 'mew', 'dragonite'];
-
 // choosing random pokemon
 let ranPokemon = pokemonList[Math.floor(Math.random() * pokemonList.length)];
 let chosenPokemon = ranPokemon;
 let underscore = [];
 let rightWord = [];
 let wrongWord = [];
-let guessRemaining = 10;
+let lives = 10;
 
 // Dom manipulation
 let getUnderscore = document.getElementById('rightLetters');
 let getWrongLetters = document.getElementById('wrongLetters');
+let getLives = document.getElementById('lives');
+document.getElementById('lives').innerHTML = lives;
+document.getElementById('wrongLetters').innerHTML = '';
 
 // create undrescore for length of word
 createUnderscore = () =>{
@@ -23,11 +25,17 @@ createUnderscore = () =>{
 }
 
 // double check with user guess
-// used keypress because it does lowercase whereas keydown does allcaps
+ // used keypress because it does lowercase whereas keydown does allcaps
 document.addEventListener('keypress', (event) => {
     // converting keycodes to char
     let keyword = String.fromCharCode(event.keyCode);
-    console.log(keyword);
+    if(keyword !== 'a' && keyword !== 'b' && keyword !== 'c' &&keyword  !== 'd' && keyword !== 'e' &&keyword !== 'f' &&keyword !== 'g' && keyword !== 'h' && keyword !== 'i' && keyword !== 'j' &&  keyword!== 'k' 
+    && keyword !== 'l' && keyword !== 'm' && keyword !== 'n' && keyword !== 'o' &&  keyword !== 'p' && keyword !== 'q' && keyword !== 'r' && keyword !== 's' && keyword !== 't' && keyword !== 'u' && keyword !== 'v' 
+    && keyword !== 'w' && keyword !== 'x' && keyword !== 'y' && keyword !== 'z')
+    { 
+        alert('alphabets only!')
+        return null;
+    }
 // user guess is correct   
     if(chosenPokemon.indexOf(keyword) > -1){
         // goe into the rightword array
@@ -39,21 +47,34 @@ document.addEventListener('keypress', (event) => {
         if(underscore.join('') === chosenPokemon){
             alert('you win')
         }
-    } else{
-        // push wrong letters to an arrow
+    } 
+    else{
+        for(let j = 0; j < wrongWord.length; j++){
+            if (keyword === wrongWord[j]){
+                return null;
+            } else{
+                console.log ('none in the array')
+            }
+        }
+        // push wrong letters to an array
         wrongWord.push(keyword);
         // deducts guessess
-        guessRemaining -= 1;
-        // manipulating the DOM to put the 
-        getWrongLetters[0].innerHTML = wrongWord + " ";
-        console.log(wrongWord)
+        lives -= 1;
+        // manipulating the DOM to put wrong letters into an array
+        getWrongLetters.innerHTML = wrongWord.join(' ')
+        getLives.innerHTML = " " + lives
+        if(lives === 0){
+            alert("you lost try again")
+        }
     }
+
     console.log(underscore)
     
 })
 
+
+
 createUnderscore();
 getUnderscore.innerHTML = underscore.join(' ');
-
 console.log(chosenPokemon);
-
+}
