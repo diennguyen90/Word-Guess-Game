@@ -8,7 +8,8 @@ let underscore = [];
 let rightWord = [];
 let wrongWord = [];
 let lives = 10;
-
+let playSound = new Audio('./assets/images/Pikachu-PIKA.wav')
+console.log(playSound)
 // Dom manipulation
 let getUnderscore = document.getElementById('rightLetters');
 let getWrongLetters = document.getElementById('wrongLetters');
@@ -29,6 +30,7 @@ createUnderscore = () =>{
 document.addEventListener('keypress', (event) => {
     // converting keycodes to char
     let keyword = String.fromCharCode(event.keyCode);
+    // only alphabets are allowed ~ all other keys are null
     if(keyword !== 'a' && keyword !== 'b' && keyword !== 'c' &&keyword  !== 'd' && keyword !== 'e' &&keyword !== 'f' &&keyword !== 'g' && keyword !== 'h' && keyword !== 'i' && keyword !== 'j' &&  keyword!== 'k' 
     && keyword !== 'l' && keyword !== 'm' && keyword !== 'n' && keyword !== 'o' &&  keyword !== 'p' && keyword !== 'q' && keyword !== 'r' && keyword !== 's' && keyword !== 't' && keyword !== 'u' && keyword !== 'v' 
     && keyword !== 'w' && keyword !== 'x' && keyword !== 'y' && keyword !== 'z')
@@ -42,7 +44,8 @@ document.addEventListener('keypress', (event) => {
         rightWord.push(keyword);
         // replace underscore with the correct letter ~~~~ still working on a way to push multiple letters of the same by looping
         underscore[chosenPokemon.indexOf(keyword)] = keyword;
-        // 
+        // play sound when rightword = keyword
+        playSound.play();
         getUnderscore.innerHTML = underscore.join(' ');
         if(underscore.join('') === chosenPokemon){
             alert('you win')
