@@ -1,5 +1,5 @@
 # Word-Guess-Game
-
+# Pokemon Theme
 -Create an Array of words 
 -Randomize Pokemon choice
 -Create undercore for the length of word
